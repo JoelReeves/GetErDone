@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Items View Controller-->
+        <!--GetErDone-->
         <scene sceneID="Ge3-aK-hKu">
             <objects>
                 <tableViewController id="j5R-hp-Kkf" customClass="ItemsViewController" customModule="GetErDone" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,7 +37,7 @@
                             <outlet property="delegate" destination="j5R-hp-Kkf" id="pUL-vu-5Nd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Cz3-it-enU"/>
+                    <navigationItem key="navigationItem" title="GetErDone" id="Cz3-it-enU"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="na9-XL-J1I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
