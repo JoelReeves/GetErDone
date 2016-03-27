@@ -18,12 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         // create a ToDoItemStore
-        let toDoItemStore = ToDoItemStore()
+        let toDoItem = ToDoItem()
         
         // access the ItemsViewController and set its item store
         let navController = window!.rootViewController as! UINavigationController
         let itemsController = navController.topViewController as! ItemsViewController
-        itemsController.toDoItemStore = toDoItemStore
+        itemsController.toDoItem = toDoItem
         return true
     }
 

@@ -8,18 +8,23 @@
 
 import UIKit
 
-class ToDoItem: NSObject {
-    var name: String
-    var isComplete: Bool
+class ToDoItem {
     
-    init(name: String, isComplete: Bool) {
-        self.name = name
-        self.isComplete = isComplete
+    var allItemsArray = [NSDictionary]()
+    var allItemsDictionary = [String: NSDictionary]()
+    
+    func createItem(name: String) -> [String: NSDictionary] {
+        struct Static {
+            static var counter = 0
+        }
         
-        super.init()
-    }
-    
-    convenience init(itemName: String) {
-        self.init(name: itemName, isComplete: false)
+        Static.counter += 1
+        
+        let item = ["name": name, "isComplete": false]
+        
+        allItemsArray.append(item)
+        allItemsDictionary["Item \(Static.counter)"] = item
+        
+        return allItemsDictionary
     }
 }
