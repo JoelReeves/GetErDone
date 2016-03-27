@@ -13,6 +13,7 @@
 		AB3C8FCB1CA5DA610089F8C9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB3C8FC91CA5DA610089F8C9 /* LaunchScreen.storyboard */; };
 		AB3C8FD71CA5DCBC0089F8C9 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3C8FD61CA5DCBC0089F8C9 /* ItemsViewController.swift */; };
 		ABA4627D1CA8106900630B51 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4627C1CA8106900630B51 /* ToDoItem.swift */; };
+		ABA4627F1CA8172F00630B51 /* ToDoItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4627E1CA8172F00630B51 /* ToDoItemStore.swift */; };
 		F41DFE90398A467B6FEBFB5E /* Pods_GetErDone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB82FD5EBE46263BD531815 /* Pods_GetErDone.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		AB3C8FCC1CA5DA610089F8C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3C8FD61CA5DCBC0089F8C9 /* ItemsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		ABA4627C1CA8106900630B51 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		ABA4627E1CA8172F00630B51 /* ToDoItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItemStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				ABA4627C1CA8106900630B51 /* ToDoItem.swift */,
+				ABA4627E1CA8172F00630B51 /* ToDoItemStore.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA4627F1CA8172F00630B51 /* ToDoItemStore.swift in Sources */,
 				AB3C8FD71CA5DCBC0089F8C9 /* ItemsViewController.swift in Sources */,
 				AB3C8FC11CA5DA610089F8C9 /* AppDelegate.swift in Sources */,
 				ABA4627D1CA8106900630B51 /* ToDoItem.swift in Sources */,
