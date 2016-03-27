@@ -39,7 +39,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="GetErDone" id="Cz3-it-enU">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="K1T-7b-sef"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="paJ-Bn-lKZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="paJ-Bn-lKZ">
+                            <connections>
+                                <action selector="addNewItem:" destination="j5R-hp-Kkf" id="FMa-gb-XD1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="na9-XL-J1I" userLabel="First Responder" sceneMemberID="firstResponder"/>

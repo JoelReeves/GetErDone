@@ -10,7 +10,8 @@ import UIKit
 
 class ToDoItem {
     
-    var allItems = [NSDictionary]()
+    var allItems = [String]()
+    var itemsDictionary = [NSDictionary]()
     var firebaseDictionary = [String: NSDictionary]()
     
     func createItems() {
@@ -28,14 +29,18 @@ class ToDoItem {
         
         let item = ["name": name, "isComplete": isComplete]
         
-        allItems.append(item)
+        itemsDictionary.append(item)
+        
+        let nameString = getItemNameText(itemsDictionary.count - 1)
+        allItems.append(nameString)
+        
         firebaseDictionary["Item \(Static.counter)"] = item
         
         return firebaseDictionary
     }
     
     func getItemNameText(index: Int) -> String {
-        let item = allItems[index]
+        let item = itemsDictionary[index]
         
         if let name = item["name"] as? String {
             return name

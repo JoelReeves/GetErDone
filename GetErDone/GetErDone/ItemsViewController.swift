@@ -16,10 +16,7 @@ class ItemsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        toDoItem.createItems()
-        
-        firebase.setValue(toDoItem.firebaseDictionary)
+
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,5 +31,18 @@ class ItemsViewController: UITableViewController {
         cell.textLabel?.text = toDoItem.getItemNameText(indexPath.row)
         
         return cell
+    }
+    
+    @IBAction func addNewItem(sender: AnyObject) {
+        toDoItem.createItem("Testing", isComplete: false)
+        let itemText = toDoItem.getItemNameText(toDoItem.allItems.count - 1)
+        
+        if let index = toDoItem.allItems.indexOf(itemText) {
+            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+            
+            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+            firebase.setValue(toDoItem.firebaseDictionary)
+        }
     }
 }
