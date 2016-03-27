@@ -12,5 +12,9 @@ class ToDoItemStore {
     
     var allItems = [ToDoItem]()
     
-    
+    func createItem(name: String) -> ToDoItem {
+        let item = ToDoItem(itemName: name)
+        allItems.append(item)
+        return item
+    }
 }
