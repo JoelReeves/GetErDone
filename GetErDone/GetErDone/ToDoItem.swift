@@ -9,5 +9,17 @@
 import UIKit
 
 class ToDoItem: NSObject {
+    var name: String
+    var isComplete: Bool
     
+    init(name: String, isComplete: Bool) {
+        self.name = name
+        self.isComplete = isComplete
+        
+        super.init()
+    }
+    
+    convenience init(itemName: String) {
+        self.init(name: itemName, isComplete: false)
+    }
 }
