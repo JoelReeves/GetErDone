@@ -11,4 +11,8 @@ import UIKit
 class ItemsViewController: UITableViewController {
     
     var toDoItemStore: ToDoItemStore!
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoItemStore.allItems.count
+    }
 }
