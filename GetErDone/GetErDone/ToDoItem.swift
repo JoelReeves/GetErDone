@@ -10,21 +10,21 @@ import UIKit
 
 class ToDoItem {
     
-    var allItemsArray = [NSDictionary]()
-    var allItemsDictionary = [String: NSDictionary]()
+    var allItems = [NSDictionary]()
+    var firebaseDictionary = [String: NSDictionary]()
     
-    func createItem(name: String) -> [String: NSDictionary] {
+    func createItem(name: String, isComplete: Bool) -> [String: NSDictionary] {
         struct Static {
             static var counter = 0
         }
         
         Static.counter += 1
         
-        let item = ["name": name, "isComplete": false]
+        let item = ["name": name, "isComplete": isComplete]
         
-        allItemsArray.append(item)
-        allItemsDictionary["Item \(Static.counter)"] = item
+        allItems.append(item)
+        firebaseDictionary["Item \(Static.counter)"] = item
         
-        return allItemsDictionary
+        return firebaseDictionary
     }
 }

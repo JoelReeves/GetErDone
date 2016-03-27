@@ -17,14 +17,14 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        toDoItem.createItem("Take over the world!!")
-        toDoItem.createItem("MVP with Adrienne")
+        toDoItem.createItem("Take over the world!!", isComplete: false)
+        toDoItem.createItem("MVP with Adrienne", isComplete: false)
         
-        firebase.setValue(toDoItem.allItemsDictionary)
+        firebase.setValue(toDoItem.firebaseDictionary)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItem.allItemsArray.count
+        return toDoItem.allItems.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -32,7 +32,7 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
         
         // set the text on the cell
-        let item = toDoItem.allItemsArray[indexPath.row]
+        let item = toDoItem.allItems[indexPath.row]
         
         if let name = item["name"] as? String {
             cell.textLabel?.text = name
