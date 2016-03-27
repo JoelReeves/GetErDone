@@ -17,8 +17,7 @@ class ItemsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        toDoItem.createItem("Take over the world!!", isComplete: false)
-        toDoItem.createItem("MVP with Adrienne", isComplete: false)
+        toDoItem.createItems()
         
         firebase.setValue(toDoItem.firebaseDictionary)
     }
@@ -32,13 +31,7 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
         
         // set the text on the cell
-        let item = toDoItem.allItems[indexPath.row]
-        
-        if let name = item["name"] as? String {
-            cell.textLabel?.text = name
-        } else {
-            cell.textLabel?.text = "unknown"
-        }
+        cell.textLabel?.text = toDoItem.getItemNameText(indexPath.row)
         
         return cell
     }
