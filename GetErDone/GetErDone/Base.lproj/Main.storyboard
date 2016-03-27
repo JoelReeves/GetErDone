@@ -37,7 +37,10 @@
                             <outlet property="delegate" destination="j5R-hp-Kkf" id="pUL-vu-5Nd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="GetErDone" id="Cz3-it-enU"/>
+                    <navigationItem key="navigationItem" title="GetErDone" id="Cz3-it-enU">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="K1T-7b-sef"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="paJ-Bn-lKZ"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="na9-XL-J1I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
