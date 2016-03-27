@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // create a ToDoItemStore
+        let toDoItemStore = ToDoItemStore()
+        
+        // access the ItemsViewController and set its item store
+        let navController = window!.rootViewController as! UINavigationController
+        let itemsController = navController.topViewController as! ItemsViewController
+        itemsController.toDoItemStore = toDoItemStore
         return true
     }
 
