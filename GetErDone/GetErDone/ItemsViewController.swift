@@ -12,6 +12,16 @@ class ItemsViewController: UITableViewController {
     
     var toDoItemStore: ToDoItemStore!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var item: ToDoItem
+        
+        for index in 1...5 {
+            item = toDoItemStore.createItem("Item \(index)")
+        }
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItemStore.allItems.count
     }
