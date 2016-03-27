@@ -7,23 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 class ItemsViewController: UITableViewController {
     
-    var toDoItemStore: ToDoItemStore!
+    var toDoItem: ToDoItem!
+    let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        toDoItem.createItem("Take over the world!!")
+        toDoItem.createItem("MVP with Adrienne")
         
-        var item: ToDoItem
-        
-        for index in 1...5 {
-            item = toDoItemStore.createItem("Item \(index)")
-        }
+        firebase.setValue(toDoItem.allItemsDictionary)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItemStore.allItems.count
+        return toDoItem.allItemsArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -31,8 +32,13 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
         
         // set the text on the cell
-        let item = toDoItemStore.allItems[indexPath.row]
-        cell.textLabel?.text = item.name
+        let item = toDoItem.allItemsArray[indexPath.row]
+        
+        if let name = item["name"] as? String {
+            cell.textLabel?.text = name
+        } else {
+            cell.textLabel?.text = "unknown"
+        }
         
         return cell
     }
