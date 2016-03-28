@@ -15,12 +15,6 @@ class ItemsViewController: UITableViewController {
     var firebaseItem: FirebaseItem!
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        
-    }
-    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItemStore.allItems.count
     }
@@ -34,6 +28,17 @@ class ItemsViewController: UITableViewController {
         cell.textLabel?.text = item.name
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // rmeoving item from the item store
+            let item = toDoItemStore.allItems[indexPath.row]
+            toDoItemStore.removeItem(item)
+            
+            // deleting that row from the table
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
     }
     
     @IBAction func addNewItem(sender: UIBarButtonItem) {
