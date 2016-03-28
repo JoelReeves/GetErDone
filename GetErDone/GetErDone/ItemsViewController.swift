@@ -15,6 +15,12 @@ class ItemsViewController: UITableViewController {
     var firebaseItem: FirebaseItem!
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        navigationItem.leftBarButtonItem = editButtonItem()
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItemStore.allItems.count
     }
