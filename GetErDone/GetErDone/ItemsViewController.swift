@@ -11,16 +11,18 @@ import Firebase
 
 class ItemsViewController: UITableViewController {
     
-    var toDoItem: ToDoItem!
+    var firebaseItem: FirebaseItem!
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        firebaseItem.createItems()
+        firebase.setValue(firebaseItem.firebaseDictionary)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItem.allItems.count
+        return firebaseItem.allItems.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -28,21 +30,22 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
         
         // set the text on the cell
-        cell.textLabel?.text = toDoItem.getItemNameText(indexPath.row)
+        cell.textLabel?.text = firebaseItem.getItemNameText(indexPath.row)
         
         return cell
     }
     
     @IBAction func addNewItem(sender: AnyObject) {
-        toDoItem.createItem("Testing", isComplete: false)
-        let itemText = toDoItem.getItemNameText(toDoItem.allItems.count - 1)
+        //firebaseItem.createItem("Testing", isComplete: false)
         
-        if let index = toDoItem.allItems.indexOf(itemText) {
+        let itemText = firebaseItem.getItemNameText(firebaseItem.allItems.count - 1)
+        
+        if let index = firebaseItem.allItems.indexOf(itemText) {
             let indexPath = NSIndexPath(forRow: index, inSection: 0)
             
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             
-            firebase.setValue(toDoItem.firebaseDictionary)
+            firebase.setValue(firebaseItem.firebaseDictionary)
         }
     }
 }
