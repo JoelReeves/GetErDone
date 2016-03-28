@@ -1,10 +1,13 @@
 PODS:
+  - CryptoSwift (0.3)
   - Firebase (2.5.1)
 
 DEPENDENCIES:
+  - CryptoSwift
   - Firebase (>= 2.5.1)
 
 SPEC CHECKSUMS:
+  CryptoSwift: 19d29910d88440fcb132761d9ab57e175f1b0d0e
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
 
 COCOAPODS: 0.39.0

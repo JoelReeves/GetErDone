@@ -11,18 +11,13 @@ import UIKit
 class FirebaseItem {
 
     var firebaseDictionary = [String: NSDictionary]()
-    
-    func createItem(name: String, isComplete: Bool) -> [String: NSDictionary] {
-        struct Static {
-            static var counter = 0
-        }
-        
-        Static.counter += 1
+       
+    func createItem(hashCode: String, name: String, isComplete: Bool) -> [String: NSDictionary] {
         
         let item = ["name": name, "isComplete": isComplete]
         
-        firebaseDictionary["Item \(Static.counter)"] = item
-        
+        firebaseDictionary[hashCode] = item
+
         return firebaseDictionary
     }
     

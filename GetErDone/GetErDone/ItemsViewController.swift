@@ -43,7 +43,7 @@ class ItemsViewController: UITableViewController {
             
             toDoItemStore.removeItem(item)
             
-            deleteItemFromFirebase("Item \(indexPath.row + 1)")
+            deleteItemFromFirebase(item)
             
             // deleting that row from the table
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -66,7 +66,7 @@ class ItemsViewController: UITableViewController {
                 // figure out where that item is in the array
                 if let index = self.toDoItemStore.allItems.indexOf(newItem) {
                     let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                
+                    
                     // insert this row into the table
                     self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 }
@@ -86,12 +86,12 @@ class ItemsViewController: UITableViewController {
     }
     
     func addItemToFirebase(item: ToDoItem) {
-        firebaseItem.createItem(item.name, isComplete: item.isComplete)
+        firebaseItem.createItem(String(item.hashCode), name: item.name, isComplete: item.isComplete)
         updateFirebase()
     }
     
-    func deleteItemFromFirebase(key: String) {
-        firebaseItem.removeItem(key)
+    func deleteItemFromFirebase(item: ToDoItem) {
+        firebaseItem.removeItem(String(item.hashCode))
         updateFirebase()
     }
     
