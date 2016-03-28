@@ -87,11 +87,15 @@ class ItemsViewController: UITableViewController {
     
     func addItemToFirebase(item: ToDoItem) {
         firebaseItem.createItem(item.name, isComplete: item.isComplete)
-        firebase.setValue(firebaseItem.firebaseDictionary)
+        updateFirebase()
     }
     
     func deleteItemFromFirebase(key: String) {
         firebaseItem.removeItem(key)
+        updateFirebase()
+    }
+    
+    func updateFirebase() {
         firebase.setValue(firebaseItem.firebaseDictionary)
     }
 }
