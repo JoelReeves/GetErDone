@@ -12,11 +12,13 @@ import Firebase
 class ItemsViewController: UITableViewController {
     
     var toDoItemStore: ToDoItemStore!
+    var firebaseItem: FirebaseItem!
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,9 +36,11 @@ class ItemsViewController: UITableViewController {
         return cell
     }
     
-    @IBAction func addNewItem(sender: AnyObject) {
+    @IBAction func addNewItem(sender: UIBarButtonItem) {
         // creating a new item and adding it to the store
-        let newItem = toDoItemStore.createItem("Sex")
+        let newItem = toDoItemStore.createItem("Batman v Superman")
+        
+        addItemToFirebase(newItem)
         
         // figure out where that item is in the array
         if let index = toDoItemStore.allItems.indexOf(newItem) {
@@ -45,5 +49,10 @@ class ItemsViewController: UITableViewController {
             // insert this row into the table
             tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
+    }
+    
+    func addItemToFirebase(item: ToDoItem) {
+        firebaseItem.createItem(item.name, isComplete: item.isComplete)
+        firebase.setValue(firebaseItem.firebaseDictionary)
     }
 }
