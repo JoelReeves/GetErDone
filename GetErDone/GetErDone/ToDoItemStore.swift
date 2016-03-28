@@ -18,4 +18,9 @@ class ToDoItemStore {
         return item
     }
     
+    func removeItem(item: ToDoItem) {
+        if let index = allItems.indexOf(item) {
+            allItems.removeAtIndex(index)
+        }
+    }
 }

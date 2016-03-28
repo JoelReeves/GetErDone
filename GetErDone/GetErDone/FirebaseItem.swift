@@ -25,4 +25,8 @@ class FirebaseItem {
         
         return firebaseDictionary
     }
+    
+    func removeItem(key: String) {
+        firebaseDictionary[key] = nil
+    }
 }
