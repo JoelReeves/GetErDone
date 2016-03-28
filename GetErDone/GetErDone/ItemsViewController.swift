@@ -38,9 +38,12 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // rmeoving item from the item store
+            // removing item from the item store and firebase
             let item = toDoItemStore.allItems[indexPath.row]
+            
             toDoItemStore.removeItem(item)
+            
+            deleteItemFromFirebase("Item \(indexPath.row + 1)")
             
             // deleting that row from the table
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -84,6 +87,11 @@ class ItemsViewController: UITableViewController {
     
     func addItemToFirebase(item: ToDoItem) {
         firebaseItem.createItem(item.name, isComplete: item.isComplete)
+        firebase.setValue(firebaseItem.firebaseDictionary)
+    }
+    
+    func deleteItemFromFirebase(key: String) {
+        firebaseItem.removeItem(key)
         firebase.setValue(firebaseItem.firebaseDictionary)
     }
 }
