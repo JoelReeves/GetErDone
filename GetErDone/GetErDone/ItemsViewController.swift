@@ -37,18 +37,38 @@ class ItemsViewController: UITableViewController {
     }
     
     @IBAction func addNewItem(sender: UIBarButtonItem) {
-        // creating a new item and adding it to the store
-        let newItem = toDoItemStore.createItem("Batman v Superman")
+        let ac = UIAlertController(title: "Add ToDoItem?", message: "", preferredStyle: .Alert)
         
-        addItemToFirebase(newItem)
-        
-        // figure out where that item is in the array
-        if let index = toDoItemStore.allItems.indexOf(newItem) {
-            let indexPath = NSIndexPath(forRow: index, inSection: 0)
+        let addAction = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: {
+            alert -> Void in
             
-            // insert this row into the table
-            tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            // only adding items if the text isn't empty
+            if let newText = ac.textFields![0].text where !newText.isEmpty {
+                // creating a new item and adding it to the store
+                let newItem = self.toDoItemStore.createItem(newText)
+                
+                self.addItemToFirebase(newItem)
+                
+                // figure out where that item is in the array
+                if let index = self.toDoItemStore.allItems.indexOf(newItem) {
+                    let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                
+                    // insert this row into the table
+                    self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                }
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        
+        ac.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+            textField.placeholder = "Item name"
         }
+        
+        ac.addAction(addAction)
+        ac.addAction(cancelAction)
+        
+        self.presentViewController(ac, animated: true, completion: nil)
     }
     
     func addItemToFirebase(item: ToDoItem) {
