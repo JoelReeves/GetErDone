@@ -19,19 +19,19 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b8l-dl-eV1" id="ft3-6B-Y40">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2X-KwA">
+                                            <rect key="frame" x="538" y="2" width="40" height="40"/>
+                                            <state key="normal" image="checkbox_unchecked"/>
+                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTX-39-Mzc">
                                             <rect key="frame" x="27" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2X-KwA">
-                                            <rect key="frame" x="538" y="2" width="40" height="40"/>
-                                            <state key="normal" image="checkbox_unchecked"/>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="YTX-39-Mzc" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="3" id="1W3-7D-nRG"/>
@@ -44,6 +44,10 @@
                                         <constraint firstAttribute="trailing" secondItem="21V-2X-KwA" secondAttribute="trailing" constant="22" id="sbA-Tk-EE4"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="completeButton" destination="21V-2X-KwA" id="bIC-S6-IPI"/>
+                                    <outlet property="nameLabel" destination="YTX-39-Mzc" id="vYO-kW-Zcp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
