@@ -12,17 +12,17 @@ import CryptoSwift
 class ToDoItem: NSObject {
     var hashCode: String
     var name: String
-    var isComplete: Bool
+    var complete: Bool
     
-    init(name: String, isComplete: Bool) {
+    init(name: String, complete: Bool) {
         self.name = name
-        self.isComplete = isComplete
-        self.hashCode = ("\(NSDate().timeIntervalSince1970)" + name + String(isComplete)).md5()
+        self.complete = complete
+        self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
         
         super.init()
     }
     
     convenience init(itemName: String) {
-        self.init(name: itemName, isComplete: false)
+        self.init(name: itemName, complete: false)
     }
 }

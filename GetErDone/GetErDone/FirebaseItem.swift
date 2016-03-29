@@ -12,9 +12,9 @@ class FirebaseItem {
 
     var firebaseDictionary = [String: NSDictionary]()
        
-    func createItem(hashCode: String, name: String, isComplete: Bool) -> [String: NSDictionary] {
+    func createItem(hashCode: String, name: String, complete: Bool) -> [String: NSDictionary] {
         
-        let item = ["name": name, "isComplete": isComplete]
+        let item = ["name": name, "complete": complete]
         
         firebaseDictionary[hashCode] = item
 

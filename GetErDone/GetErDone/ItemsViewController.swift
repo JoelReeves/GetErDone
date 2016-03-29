@@ -86,7 +86,7 @@ class ItemsViewController: UITableViewController {
     }
     
     func addItemToFirebase(item: ToDoItem) {
-        firebaseItem.createItem(item.hashCode, name: item.name, isComplete: item.isComplete)
+        firebaseItem.createItem(item.hashCode, name: item.name, complete: item.complete)
         updateFirebase()
     }
     
