@@ -50,6 +50,10 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        toDoItemStore.moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
+    }
+    
     @IBAction func addNewItem(sender: UIBarButtonItem) {
         let ac = UIAlertController(title: "Add ToDoItem?", message: "", preferredStyle: .Alert)
         

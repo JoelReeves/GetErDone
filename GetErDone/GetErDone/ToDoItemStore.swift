@@ -23,4 +23,19 @@ class ToDoItemStore {
             allItems.removeAtIndex(index)
         }
     }
+    
+    func moveItemAtIndex(fromIndex: Int, toIndex: Int) {
+        if fromIndex == toIndex {
+            return
+        }
+        
+        // get reference to object being moved
+        let movedItem = allItems[fromIndex]
+        
+        // remove item from array
+        allItems.removeAtIndex(fromIndex)
+        
+        // insert item in array at new location
+        allItems.insert(movedItem, atIndex: toIndex)
+    }
 }
