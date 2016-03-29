@@ -27,13 +27,22 @@ class ItemsViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // getting a new or recycled cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("UITableViewCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("ToDoItemCell", forIndexPath: indexPath) as! ToDoItemCell
         
         // set the text on the cell
         let item = toDoItemStore.allItems[indexPath.row]
-        cell.textLabel?.text = item.name
+        cell.nameLabel.text = item.name
+        
+        cell.onButtonClicked = {
+            cell.completeButton.selected = !cell.completeButton.selected
+            //TODO - also update the item on Firebase
+        }
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {

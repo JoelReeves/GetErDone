@@ -22,30 +22,31 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2X-KwA">
-                                            <rect key="frame" x="538" y="2" width="40" height="40"/>
-                                            <state key="normal" image="checkbox_unchecked"/>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTX-39-Mzc">
                                             <rect key="frame" x="27" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87Q-uy-ovJ">
+                                            <rect key="frame" x="546" y="2" width="40" height="40"/>
+                                            <state key="normal" image="checkbox_unchecked"/>
+                                            <state key="selected" image="checkbox_checked"/>
+                                            <connections>
+                                                <action selector="completeButtonClicked:" destination="b8l-dl-eV1" eventType="touchUpInside" id="8Qn-bv-Fwm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="3" id="1W3-7D-nRG"/>
-                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="19" id="28C-Rn-eiB"/>
-                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="ARw-P0-DH1"/>
-                                        <constraint firstItem="21V-2X-KwA" firstAttribute="leading" secondItem="YTX-39-Mzc" secondAttribute="trailing" constant="469" id="COg-qw-mgv"/>
-                                        <constraint firstAttribute="bottom" secondItem="21V-2X-KwA" secondAttribute="bottom" constant="2" id="DnX-ef-Ps1"/>
-                                        <constraint firstItem="21V-2X-KwA" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="top" constant="2" id="Pvk-Vu-JVU"/>
-                                        <constraint firstItem="21V-2X-KwA" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="Wbw-Lg-nDs"/>
-                                        <constraint firstAttribute="trailing" secondItem="21V-2X-KwA" secondAttribute="trailing" constant="22" id="sbA-Tk-EE4"/>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="Gcr-M1-Kcp"/>
+                                        <constraint firstItem="87Q-uy-ovJ" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="JQi-BI-pQt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="87Q-uy-ovJ" secondAttribute="trailing" constant="6" id="OYF-Bn-teI"/>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="3" id="kaW-zg-5ie"/>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="19" id="sla-cT-GXW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="completeButton" destination="21V-2X-KwA" id="bIC-S6-IPI"/>
+                                    <outlet property="completeButton" destination="87Q-uy-ovJ" id="MNo-c0-pQa"/>
                                     <outlet property="nameLabel" destination="YTX-39-Mzc" id="vYO-kW-Zcp"/>
                                 </connections>
                             </tableViewCell>
@@ -88,6 +89,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkbox_checked" width="40" height="40"/>
         <image name="checkbox_unchecked" width="40" height="40"/>
     </resources>
 </document>
