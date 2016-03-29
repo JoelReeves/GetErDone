@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--GetErDone-->
@@ -20,6 +21,28 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b8l-dl-eV1" id="ft3-6B-Y40">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTX-39-Mzc">
+                                            <rect key="frame" x="27" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21V-2X-KwA">
+                                            <rect key="frame" x="538" y="2" width="40" height="40"/>
+                                            <state key="normal" image="checkbox_unchecked"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="3" id="1W3-7D-nRG"/>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="19" id="28C-Rn-eiB"/>
+                                        <constraint firstItem="YTX-39-Mzc" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="ARw-P0-DH1"/>
+                                        <constraint firstItem="21V-2X-KwA" firstAttribute="leading" secondItem="YTX-39-Mzc" secondAttribute="trailing" constant="469" id="COg-qw-mgv"/>
+                                        <constraint firstAttribute="bottom" secondItem="21V-2X-KwA" secondAttribute="bottom" constant="2" id="DnX-ef-Ps1"/>
+                                        <constraint firstItem="21V-2X-KwA" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="top" constant="2" id="Pvk-Vu-JVU"/>
+                                        <constraint firstItem="21V-2X-KwA" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="Wbw-Lg-nDs"/>
+                                        <constraint firstAttribute="trailing" secondItem="21V-2X-KwA" secondAttribute="trailing" constant="22" id="sbA-Tk-EE4"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -60,4 +83,7 @@
             <point key="canvasLocation" x="1231" y="601"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="checkbox_unchecked" width="40" height="40"/>
+    </resources>
 </document>
