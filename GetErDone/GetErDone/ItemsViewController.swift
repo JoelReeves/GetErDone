@@ -66,7 +66,7 @@ class ItemsViewController: UITableViewController {
     @IBAction func addNewItem(sender: UIBarButtonItem) {
         let ac = UIAlertController(title: "Add ToDoItem?", message: "", preferredStyle: .Alert)
         
-        let addAction = UIAlertAction(title: "Add", style: UIAlertActionStyle.Default, handler: {
+        let addAction = UIAlertAction(title: "Add", style: .Default, handler: {
             alert -> Void in
             
             // only adding items if the text isn't empty
@@ -86,7 +86,7 @@ class ItemsViewController: UITableViewController {
             }
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         ac.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
             textField.placeholder = "Item name"
