@@ -10,32 +10,15 @@ import UIKit
 
 class ToDoItemStore {
     
-    var allItems = [ToDoItem]()
+    var allItems = [NSDictionary]()
+    var valuesDictionary = [:]
     
     func createItem(name: String) -> ToDoItem {
         let item = ToDoItem(itemName: name)
-        allItems.append(item)
+        
+        valuesDictionary = ["name": item.name, "complete": item.complete]       
+        allItems.append(valuesDictionary)
+
         return item
-    }
-    
-    func removeItem(item: ToDoItem) {
-        if let index = allItems.indexOf(item) {
-            allItems.removeAtIndex(index)
-        }
-    }
-    
-    func moveItemAtIndex(fromIndex: Int, toIndex: Int) {
-        if fromIndex == toIndex {
-            return
-        }
-        
-        // get reference to object being moved
-        let movedItem = allItems[fromIndex]
-        
-        // remove item from array
-        allItems.removeAtIndex(fromIndex)
-        
-        // insert item in array at new location
-        allItems.insert(movedItem, atIndex: toIndex)
     }
 }
