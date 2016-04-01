@@ -34,15 +34,9 @@ class ItemsViewController: UITableViewController {
         // getting a new or recycled cell
         let cell = tableView.dequeueReusableCellWithIdentifier("ToDoItemCell", forIndexPath: indexPath) as! ToDoItemCell
         
-        let firebaseDictionary = toDoItemStore.allItems[indexPath.row]
+        let dictionaryRow = toDoItemStore.allItems[indexPath.row]
         
-        // looping through the dictionary's values to find the "name" key
-        // setting the text of the cell as that name
-        for (_, value) in firebaseDictionary {
-            if let name = value["name"] as? String {
-                cell.nameLabel.text = name
-            }
-        }
+        cell.textLabel?.text = dictionaryRow["name"] as? String
         
         cell.onButtonClicked = {
             cell.completeButton.selected = !cell.completeButton.selected
@@ -96,15 +90,11 @@ class ItemsViewController: UITableViewController {
         firebase.observeEventType(.Value, withBlock: { snapshot in
             
             var tempItems = [NSDictionary]()
-            var tempDictionary = [String: NSDictionary]()
         
             for items in snapshot.children {
                 let child = items as! FDataSnapshot
-                let key = child.key
-                let values = child.value as! NSDictionary
-                
-                tempDictionary[key] = values
-                tempItems.append(tempDictionary)
+                let dictionary = child.value as! NSDictionary
+                tempItems.append(dictionary)
 
             }
             
