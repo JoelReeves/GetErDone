@@ -23,8 +23,7 @@ class ItemsViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadDataFromFirebase()
-        //deleteDataFromFirebase()
+        refreshFirebaseData()
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,10 +40,13 @@ class ItemsViewController: UITableViewController {
             if let name = values["name"] as? String {
                 cell.textLabel?.text = name
             }
+            if let complete = values["complete"] as? Bool {
+                cell.completeLabel?.text = String(complete)
+            }
         }
         
-        cell.onButtonClicked = {
-            cell.completeButton.selected = !cell.completeButton.selected
+        cell.onLabelClicked = {
+            //cell.completeButton.selected = !cell.completeButton.selected
             //TODO - also update the item on Firebase
             
         }
@@ -59,12 +61,12 @@ class ItemsViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let dictionaryRow = toDoItemStore.allItems[indexPath.row]
-            let name = dictionaryRow["name"] as! String
-            let key = dictionaryRow["hashcode"] as! String
             
+            let key = [String](dictionaryRow.keys)[0]
+
             // delete data from Firebase
-            let child = firebase.childByAppendingPath(key)
-            child.removeValue()
+            let item = firebase.childByAppendingPath(key)
+            item.removeValue()
         }
     }
     
@@ -96,7 +98,7 @@ class ItemsViewController: UITableViewController {
         self.presentViewController(ac, animated: true, completion: nil)
     }
     
-    func loadDataFromFirebase() {
+    func refreshFirebaseData() {
         firebase.observeEventType(.Value, withBlock: { snapshot in
             
             var tempItems = [[String: NSDictionary]]()
@@ -112,17 +114,8 @@ class ItemsViewController: UITableViewController {
 
             }
             
-            if !tempItems.isEmpty {
-                self.toDoItemStore.allItems = tempItems
-                self.tableView.reloadData()
-            }
-        })
-    }
-    
-    func deleteDataFromFirebase() {
-        firebase.observeEventType(.ChildRemoved, withBlock: { snapshot in
-            let title = snapshot.value.objectForKey("title") as? String
-            print("Item deleted \(title)")
+            self.toDoItemStore.allItems = tempItems
+            self.tableView.reloadData()
         })
     }
 }
