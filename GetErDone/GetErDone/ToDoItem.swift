@@ -13,11 +13,13 @@ class ToDoItem: NSObject {
     var hashCode: String
     var name: String
     var complete: Bool
+    var dictionary: NSDictionary
     
     init(name: String, complete: Bool) {
         self.name = name
         self.complete = complete
         self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
+        self.dictionary = ["name": name, "complete": complete]
         
         super.init()
     }

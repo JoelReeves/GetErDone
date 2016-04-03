@@ -10,15 +10,20 @@ import UIKit
 
 class ToDoItemStore {
     
-    var allItems = [NSDictionary]()
-    var valuesDictionary = [:]
+    var allItems = [[String: NSDictionary]]()
+    var newItem = [String: NSDictionary]()
     
-    func createItem(name: String) -> ToDoItem {
-        let item = ToDoItem(itemName: name)
+    func createItem(name: String) {
+        let toDoItem = ToDoItem(itemName: name)
         
-        valuesDictionary = ["name": item.name, "complete": item.complete]       
-        allItems.append(valuesDictionary)
-
-        return item
+        let stringKey = toDoItem.hashCode
+        let dictionary = toDoItem.dictionary
+        
+        newItem[stringKey] = dictionary
+        allItems.append(newItem)
+    }
+    
+    func deleteItem(index: Int, key: String) {
+        
     }
 }
