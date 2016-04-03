@@ -22,8 +22,4 @@ class ToDoItemStore {
         newItem[stringKey] = dictionary
         allItems.append(newItem)
     }
-    
-    func deleteItem(index: Int, key: String) {
-        
-    }
 }
