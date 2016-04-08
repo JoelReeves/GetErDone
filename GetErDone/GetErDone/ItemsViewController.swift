@@ -11,7 +11,7 @@ import Firebase
 
 class ItemsViewController: UITableViewController {
     
-    var toDoItemStore: ToDoItemStore!
+    var items = [ToDoItem]()
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,47 +27,45 @@ class ItemsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return toDoItemStore.allItems.count
+        return items.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // getting a new or recycled cell
         let cell = tableView.dequeueReusableCellWithIdentifier("ToDoItemCell", forIndexPath: indexPath) as! ToDoItemCell
         
-        let dictionaryRow = toDoItemStore.allItems[indexPath.row]
-        
-        for values in dictionaryRow.values {
-            if let name = values["name"] as? String {
-                cell.textLabel?.text = name
-            }
-            if let complete = values["complete"] as? Bool {
-                cell.completeLabel?.text = String(complete)
-            }
-        }
-        
-        cell.onLabelClicked = {
-            //cell.completeButton.selected = !cell.completeButton.selected
-            //TODO - also update the item on Firebase
-            
-        }
+        let toDoItem = items[indexPath.row]
+        cell.textLabel?.text = toDoItem.name
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-    }
-    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let dictionaryRow = toDoItemStore.allItems[indexPath.row]
+            let toDoItem = items[indexPath.row]
             
-            let key = [String](dictionaryRow.keys)[0]
-
-            // delete data from Firebase
-            let item = firebase.childByAppendingPath(key)
-            item.removeValue()
+            let hashCode = toDoItem.hashCode
+            let itemToDelete = firebase.childByAppendingPath(hashCode)
+            
+            itemToDelete.removeValue()
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        let toDoItem = items[indexPath.row]
+        let toDoItemComplete = !toDoItem.complete
+        
+        if !toDoItemComplete {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.textLabel?.textColor = UIColor.blackColor()
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell.textLabel?.textColor = UIColor.grayColor()
+        }
+        
+        let toDoItemPath = firebase.childByAppendingPath(toDoItem.hashCode)
+        toDoItemPath.updateChildValues(["complete": toDoItemComplete])
     }
     
     @IBAction func addNewItem(sender: UIBarButtonItem) {
@@ -78,11 +76,9 @@ class ItemsViewController: UITableViewController {
             
             // only adding items if the text isn't empty
             if let newText = ac.textFields![0].text where !newText.isEmpty {
-                // creating a new item and adding it to the store
-                self.toDoItemStore.createItem(newText)
-                
-                // adding the data to Firebase
-                self.firebase.setValue(self.toDoItemStore.newItem)
+                let toDoItem = ToDoItem(name: newText)
+                let toDoItemRef = self.firebase.childByAppendingPath(toDoItem.hashCode)
+                toDoItemRef.setValue(toDoItem.dictionary)
             }
         })
         
@@ -101,21 +97,22 @@ class ItemsViewController: UITableViewController {
     func refreshFirebaseData() {
         firebase.observeEventType(.Value, withBlock: { snapshot in
             
-            var tempItems = [[String: NSDictionary]]()
+            var snapshotItems = [ToDoItem]()
             
             for items in snapshot.children {
-                let child = items as! FDataSnapshot
-                let key = child.key
-                let dictionary = child.value as! NSDictionary
+                let item = items as! FDataSnapshot
                 
-                var tempItem = [String: NSDictionary]()
-                tempItem[key] = dictionary
-                tempItems.append(tempItem)
-
+                let hashCode = item.key
+                let name = item.value["name"] as! String
+                let complete = item.value["complete"] as! Bool
+                
+                let toDoItem = ToDoItem(name: name, complete: complete, hashCode: hashCode)
+                snapshotItems.append(toDoItem)
             }
             
-            self.toDoItemStore.allItems = tempItems
+            self.items = snapshotItems
             self.tableView.reloadData()
+            
         })
     }
 }

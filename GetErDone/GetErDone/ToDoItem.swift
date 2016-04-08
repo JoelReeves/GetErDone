@@ -9,22 +9,24 @@
 import UIKit
 import CryptoSwift
 
-class ToDoItem: NSObject {
+struct ToDoItem {
     var hashCode: String
     var name: String
     var complete: Bool
     var dictionary: NSDictionary
     
-    init(name: String, complete: Bool) {
+    init(name: String, complete: Bool, hashCode: String) {
         self.name = name
         self.complete = complete
-        self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
+        self.hashCode = hashCode
         self.dictionary = ["name": name, "complete": complete]
-        
-        super.init()
     }
     
-    convenience init(itemName: String) {
-        self.init(name: itemName, complete: false)
+    init(name: String) {
+        self.name = name
+        self.complete = false
+        self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
+        self.dictionary = ["name": name, "complete": complete]
+
     }
 }
