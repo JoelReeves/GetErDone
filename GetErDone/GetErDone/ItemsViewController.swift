@@ -30,22 +30,8 @@ class ItemsViewController: UITableViewController {
         return items.count
     }
     
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {        
-        let fromIndex = sourceIndexPath.row
-        let toIndex = destinationIndexPath.row
-        
-        if fromIndex == toIndex {
-            return
-        }
-        
-        // getting reference to object being moved
-        let movedItem = items[fromIndex]
-        
-        // remove item from the array
-        items.removeAtIndex(fromIndex)
-        
-        // insert item in array at new location
-        items.insert(movedItem, atIndex: toIndex)
+    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -78,6 +64,21 @@ class ItemsViewController: UITableViewController {
         
         let toDoItemPath = firebase.childByAppendingPath(toDoItem.hashCode)
         toDoItemPath.updateChildValues(["complete": toDoItemComplete])
+    }
+    
+    func moveItemAtIndex(fromIndex: Int, toIndex: Int) {
+        if fromIndex == toIndex {
+            return
+        }
+        
+        // get reference to object being moved
+        let movedItem = items[fromIndex]
+        
+        // remove item from array
+        items.removeAtIndex(fromIndex)
+        
+        // insert item in array at new location
+        items.insert(movedItem, atIndex: toIndex)
     }
     
     func toggleCompleteState(cell: UITableViewCell, complete: Bool) {
