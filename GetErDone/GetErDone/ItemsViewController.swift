@@ -56,16 +56,34 @@ class ItemsViewController: UITableViewController {
         let toDoItem = items[indexPath.row]
         let toDoItemComplete = !toDoItem.complete
         
-        if !toDoItemComplete {
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.textLabel?.textColor = UIColor.blackColor()
-        } else {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
-            cell.textLabel?.textColor = UIColor.grayColor()
-        }
+        toggleCompleteState(cell, complete: toDoItemComplete)
         
         let toDoItemPath = firebase.childByAppendingPath(toDoItem.hashCode)
         toDoItemPath.updateChildValues(["complete": toDoItemComplete])
+    }
+    
+    func toggleCompleteState(cell: UITableViewCell, complete: Bool) {
+        let cellLabelText = cell.textLabel?.text
+        
+        if !complete {
+            cell.accessoryType = UITableViewCellAccessoryType.None
+            
+            let attributes = [
+                NSForegroundColorAttributeName: UIColor.blackColor(),
+                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleNone.rawValue)
+            ]
+            
+            cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+            
+            let attributes = [
+                NSForegroundColorAttributeName: UIColor.grayColor(),
+                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)
+            ]
+            
+            cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
+        }
     }
     
     @IBAction func addNewItem(sender: UIBarButtonItem) {
