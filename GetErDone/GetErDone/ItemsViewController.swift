@@ -85,7 +85,6 @@ class ItemsViewController: UITableViewController {
         let cellLabelText = cell.textLabel?.text
         
         if !complete {
-            cell.accessoryType = UITableViewCellAccessoryType.None
             
             let attributes = [
                 NSForegroundColorAttributeName: UIColor.blackColor(),
@@ -94,7 +93,6 @@ class ItemsViewController: UITableViewController {
             
             cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
         } else {
-            cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             
             let attributes = [
                 NSForegroundColorAttributeName: UIColor.grayColor(),
