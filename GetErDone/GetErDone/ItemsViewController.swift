@@ -11,7 +11,7 @@ import Firebase
 
 class ItemsViewController: UITableViewController {
     
-    var items = [ToDoItem]()
+    var items: [ToDoItem]!
     let firebase = Firebase(url: "https://geterdone.firebaseio.com/")
     
     required init?(coder aDecoder: NSCoder) {
