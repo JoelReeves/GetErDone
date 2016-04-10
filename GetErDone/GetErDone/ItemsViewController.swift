@@ -95,8 +95,8 @@ class ItemsViewController: UITableViewController {
         } else {
             
             let attributes = [
-                NSForegroundColorAttributeName: UIColor.grayColor(),
-                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)
+                NSForegroundColorAttributeName: UIColor.redColor(),
+                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleThick.rawValue)
             ]
             
             cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
