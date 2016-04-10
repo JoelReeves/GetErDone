@@ -26,6 +26,8 @@ class ItemsViewController: UITableViewController {
         refreshFirebaseData()
     }
     
+    // MARK: UITableView delegate methods
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -103,6 +105,8 @@ class ItemsViewController: UITableViewController {
         }
     }
     
+    // MARK: Add new ToDoItem
+    
     @IBAction func addNewItem(sender: UIBarButtonItem) {
         let ac = UIAlertController(title: "Add ToDoItem?", message: "", preferredStyle: .Alert)
         
@@ -128,6 +132,8 @@ class ItemsViewController: UITableViewController {
         
         self.presentViewController(ac, animated: true, completion: nil)
     }
+    
+    // MARK: Update Firebase data
     
     func refreshFirebaseData() {
         firebase.observeEventType(.Value, withBlock: { snapshot in

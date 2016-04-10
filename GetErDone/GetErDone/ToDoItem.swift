@@ -27,6 +27,5 @@ struct ToDoItem {
         self.complete = false
         self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
         self.dictionary = ["name": name, "complete": complete]
-
     }
 }
