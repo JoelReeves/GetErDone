@@ -32,10 +32,6 @@ class ItemsViewController: UITableViewController {
         return items.count
     }
     
-    override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        moveItemAtIndex(sourceIndexPath.row, toIndex: destinationIndexPath.row)
-    }
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // getting a new or recycled cell
         let cell = tableView.dequeueReusableCellWithIdentifier("ToDoItemCell", forIndexPath: indexPath) as! ToDoItemCell
@@ -66,21 +62,6 @@ class ItemsViewController: UITableViewController {
         
         let toDoItemPath = firebase.childByAppendingPath(toDoItem.hashCode)
         toDoItemPath.updateChildValues(["complete": toDoItemComplete])
-    }
-    
-    func moveItemAtIndex(fromIndex: Int, toIndex: Int) {
-        if fromIndex == toIndex {
-            return
-        }
-        
-        // get reference to object being moved
-        let movedItem = items[fromIndex]
-        
-        // remove item from array
-        items.removeAtIndex(fromIndex)
-        
-        // insert item in array at new location
-        items.insert(movedItem, atIndex: toIndex)
     }
     
     func toggleCompleteState(cell: UITableViewCell, complete: Bool) {
@@ -136,6 +117,7 @@ class ItemsViewController: UITableViewController {
     // MARK: Update Firebase data
     
     func refreshFirebaseData() {
+        
         firebase.observeEventType(.Value, withBlock: { snapshot in
             
             var snapshotItems = [ToDoItem]()
@@ -153,7 +135,6 @@ class ItemsViewController: UITableViewController {
             
             self.items = snapshotItems
             self.tableView.reloadData()
-            
         })
     }
 }
