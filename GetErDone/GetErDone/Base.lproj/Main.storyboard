@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--GetErDone-->
@@ -21,15 +22,33 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roZ-58-3uf">
-                                            <rect key="frame" x="33" y="11" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roZ-58-3uf">
+                                            <rect key="frame" x="18" y="7" width="480" height="25"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8P-bs-BlH">
+                                            <rect key="frame" x="552" y="9" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="U7T-Qo-9kO"/>
+                                            </constraints>
+                                            <state key="normal" image="checkbox_unchecked"/>
+                                            <state key="selected" image="checkbox_checked"/>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="roZ-58-3uf" secondAttribute="bottom" constant="3.5" id="21g-bB-50n"/>
+                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="DZr-UY-Nc1"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="D8P-bs-BlH" secondAttribute="trailing" constant="15" id="JdM-AW-94L"/>
+                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="leading" secondItem="roZ-58-3uf" secondAttribute="trailing" constant="54" id="Pfq-XU-WNQ"/>
+                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="1" id="V83-im-8nV"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="10" id="c0V-Op-ekX"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="-1" id="yIQ-Tg-b83"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="completeButton" destination="D8P-bs-BlH" id="a4p-PG-Mue"/>
                                     <outlet property="nameLabel" destination="roZ-58-3uf" id="ccT-2E-Dlq"/>
                                 </connections>
                             </tableViewCell>
@@ -71,4 +90,8 @@
             <point key="canvasLocation" x="1231" y="601"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="checkbox_checked" width="40" height="40"/>
+        <image name="checkbox_unchecked" width="40" height="40"/>
+    </resources>
 </document>

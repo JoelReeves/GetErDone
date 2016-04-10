@@ -11,5 +11,6 @@ import UIKit
 class ToDoItemCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var completeButton: UIButton!
 
 }
