@@ -11,6 +11,13 @@ import UIKit
 class ToDoItemCell: UITableViewCell {
     
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var completeButton: UIButton!
-
+    @IBOutlet var editButton: UIButton!
+    
+    var onButtonClicked : (() -> Void)? = nil
+    
+    @IBAction func editButtonPressed(sender: UIButton) {
+        if let onButtonClicked = self.onButtonClicked {
+            onButtonClicked()
+        }
+    }
 }

@@ -31,13 +31,40 @@ class ItemsViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // getting a new or recycled cell
         let cell = tableView.dequeueReusableCellWithIdentifier("ToDoItemCell", forIndexPath: indexPath) as! ToDoItemCell
         
         let toDoItem = items[indexPath.row]
-        cell.textLabel?.text = toDoItem.name
+        cell.nameLabel?.text = toDoItem.name
+        
+        cell.onButtonClicked = {
+            let ac = UIAlertController(title: "Edit ToDoItem?", message: "", preferredStyle: .Alert)
+            
+            let saveAction = UIAlertAction(title: "Save", style: .Default, handler: {
+                alert -> Void in
+                
+                // only saving text if the textfield isn't empty
+                if let newText = ac.textFields![0].text where !newText.isEmpty {
+                    cell.nameLabel.text = newText
+                    
+                    let toDoItemPath = self.firebase.childByAppendingPath(toDoItem.hashCode)
+                    toDoItemPath.updateChildValues(["name": newText])
+                }
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            
+            ac.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
+                textField.placeholder = "New Item name"
+            }
+            
+            ac.addAction(saveAction)
+            ac.addAction(cancelAction)
+            
+            self.presentViewController(ac, animated: true, completion: nil)
+        }
         
         return cell
     }
@@ -54,9 +81,13 @@ class ItemsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)!
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)! as! ToDoItemCell
         let toDoItem = items[indexPath.row]
         let toDoItemComplete = !toDoItem.complete
+
+        print(toDoItemComplete)
         
         toggleCompleteState(cell, complete: toDoItemComplete)
         
@@ -64,25 +95,25 @@ class ItemsViewController: UITableViewController {
         toDoItemPath.updateChildValues(["complete": toDoItemComplete])
     }
     
-    func toggleCompleteState(cell: UITableViewCell, complete: Bool) {
-        let cellLabelText = cell.textLabel?.text
-        
-        if !complete {
-            
-            let attributes = [
-                NSForegroundColorAttributeName: UIColor.blackColor(),
-                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleNone.rawValue)
-            ]
-            
-            cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
-        } else {
-            
-            let attributes = [
-                NSForegroundColorAttributeName: UIColor.redColor(),
-                NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleThick.rawValue)
-            ]
-            
-            cell.textLabel?.attributedText = NSAttributedString(string: cellLabelText!, attributes: attributes)
+    func toggleCompleteState(cell: ToDoItemCell, complete: Bool) {
+        if let text = cell.nameLabel.text {
+            if !complete {
+                
+                let attributes = [
+                    NSForegroundColorAttributeName: UIColor.blackColor(),
+                    NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleNone.rawValue)
+                ]
+                
+                cell.nameLabel?.attributedText = NSAttributedString(string: text, attributes: attributes)
+            } else {
+                
+                let attributes = [
+                    NSForegroundColorAttributeName: UIColor.redColor(),
+                    NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleThick.rawValue)
+                ]
+                            
+                cell.nameLabel?.attributedText = NSAttributedString(string: text, attributes: attributes)
+            }
         }
     }
     
@@ -97,8 +128,9 @@ class ItemsViewController: UITableViewController {
             // only adding items if the text isn't empty
             if let newText = ac.textFields![0].text where !newText.isEmpty {
                 let toDoItem = ToDoItem(name: newText)
-                let toDoItemRef = self.firebase.childByAppendingPath(toDoItem.hashCode)
-                toDoItemRef.setValue(toDoItem.dictionary)
+                
+                let toDoItemPath = self.firebase.childByAppendingPath(toDoItem.hashCode)
+                toDoItemPath.setValue(toDoItem.dictionary)
             }
         })
         

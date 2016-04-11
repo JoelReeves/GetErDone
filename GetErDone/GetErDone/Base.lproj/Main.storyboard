@@ -19,36 +19,38 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b8l-dl-eV1" id="ft3-6B-Y40">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="roZ-58-3uf">
-                                            <rect key="frame" x="18" y="7" width="480" height="25"/>
+                                            <rect key="frame" x="18" y="7" width="502" height="25"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D8P-bs-BlH">
-                                            <rect key="frame" x="552" y="9" width="25" height="25"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aky-yC-caI">
+                                            <rect key="frame" x="558" y="7" width="25" height="25"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="U7T-Qo-9kO"/>
+                                                <constraint firstAttribute="width" constant="25" id="W6A-hJ-bGo"/>
                                             </constraints>
-                                            <state key="normal" image="checkbox_unchecked"/>
-                                            <state key="selected" image="checkbox_checked"/>
+                                            <state key="normal" image="edit_button"/>
+                                            <connections>
+                                                <action selector="editButtonPressed:" destination="b8l-dl-eV1" eventType="touchUpInside" id="E4f-YK-OYB"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="roZ-58-3uf" secondAttribute="bottom" constant="3.5" id="21g-bB-50n"/>
-                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="centerY" secondItem="ft3-6B-Y40" secondAttribute="centerY" id="DZr-UY-Nc1"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="D8P-bs-BlH" secondAttribute="trailing" constant="15" id="JdM-AW-94L"/>
-                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="leading" secondItem="roZ-58-3uf" secondAttribute="trailing" constant="54" id="Pfq-XU-WNQ"/>
-                                        <constraint firstItem="D8P-bs-BlH" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="1" id="V83-im-8nV"/>
-                                        <constraint firstItem="roZ-58-3uf" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="10" id="c0V-Op-ekX"/>
-                                        <constraint firstItem="roZ-58-3uf" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="-1" id="yIQ-Tg-b83"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="leading" secondItem="ft3-6B-Y40" secondAttribute="leadingMargin" constant="10" id="M2X-ZQ-0zu"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aky-yC-caI" secondAttribute="trailing" constant="9" id="WkY-CO-REJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="roZ-58-3uf" secondAttribute="bottom" constant="3.5" id="WzR-Lx-bz1"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="top" secondItem="aky-yC-caI" secondAttribute="top" id="acW-Lt-wIc"/>
+                                        <constraint firstItem="aky-yC-caI" firstAttribute="leading" secondItem="roZ-58-3uf" secondAttribute="trailing" constant="38" id="bNw-qg-j14"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="top" secondItem="ft3-6B-Y40" secondAttribute="topMargin" constant="-1" id="oq6-xG-KGT"/>
+                                        <constraint firstItem="roZ-58-3uf" firstAttribute="bottom" secondItem="aky-yC-caI" secondAttribute="bottom" id="xKp-d9-KcH"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="completeButton" destination="D8P-bs-BlH" id="a4p-PG-Mue"/>
+                                    <outlet property="editButton" destination="aky-yC-caI" id="DJC-ji-fbv"/>
                                     <outlet property="nameLabel" destination="roZ-58-3uf" id="ccT-2E-Dlq"/>
                                 </connections>
                             </tableViewCell>
@@ -91,7 +93,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkbox_checked" width="40" height="40"/>
-        <image name="checkbox_unchecked" width="40" height="40"/>
+        <image name="edit_button" width="40" height="40"/>
     </resources>
 </document>
