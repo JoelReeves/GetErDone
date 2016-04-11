@@ -10,22 +10,25 @@ import UIKit
 import CryptoSwift
 
 struct ToDoItem {
-    var hashCode: String
     var name: String
     var complete: Bool
+    var hashCode: String
+    var creationTime: Double
     var dictionary: NSDictionary
     
     init(name: String, complete: Bool, hashCode: String) {
+        self.creationTime = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = complete
         self.hashCode = hashCode
-        self.dictionary = ["name": name, "complete": complete]
+        self.dictionary = ["name": name, "complete": complete, "creationTime": creationTime]
     }
     
     init(name: String) {
+        self.creationTime = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = false
-        self.hashCode = ("\(NSDate().timeIntervalSince1970)" + self.name + String(self.complete)).md5()
-        self.dictionary = ["name": name, "complete": complete]
+        self.hashCode = (String(self.creationTime) + self.name + String(self.complete)).md5()
+        self.dictionary = ["name": name, "complete": complete, "creationTime": creationTime]
     }
 }
