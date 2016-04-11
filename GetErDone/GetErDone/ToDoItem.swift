@@ -33,7 +33,7 @@ struct ToDoItem {
         let date = NSDate(timeIntervalSince1970: creationDate)
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd-yyyy h:mm:ss a"
+        dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a"
         
         return dateFormatter.stringFromDate(date)
     }
