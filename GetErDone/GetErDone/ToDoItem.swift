@@ -13,22 +13,28 @@ struct ToDoItem {
     var name: String
     var complete: Bool
     var hashCode: String
-    var creationTime: Double
-    var dictionary: NSDictionary
+    var creationDate: Double
     
     init(name: String, complete: Bool, hashCode: String) {
-        self.creationTime = NSDate().timeIntervalSince1970
+        self.creationDate = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = complete
         self.hashCode = hashCode
-        self.dictionary = ["name": name, "complete": complete, "creationTime": creationTime]
     }
     
     init(name: String) {
-        self.creationTime = NSDate().timeIntervalSince1970
+        self.creationDate = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = false
-        self.hashCode = (String(self.creationTime) + self.name + String(self.complete)).md5()
-        self.dictionary = ["name": name, "complete": complete, "creationTime": creationTime]
+        self.hashCode = (String(self.creationDate) + self.name + String(self.complete)).md5()
+    }
+    
+    func dateToString() -> String {
+        let date = NSDate(timeIntervalSince1970: creationDate)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy h:mm:ss a"
+        
+        return dateFormatter.stringFromDate(date)
     }
 }

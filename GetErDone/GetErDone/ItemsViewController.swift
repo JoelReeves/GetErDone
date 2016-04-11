@@ -130,7 +130,8 @@ class ItemsViewController: UITableViewController {
                 let toDoItem = ToDoItem(name: newText)
                 
                 let toDoItemPath = self.firebase.childByAppendingPath(toDoItem.hashCode)
-                toDoItemPath.setValue(toDoItem.dictionary)
+                let toDoItemDictionary = ["name": toDoItem.name, "complete": toDoItem.complete, "creationTime": toDoItem.dateToString()]
+                toDoItemPath.setValue(toDoItemDictionary)
             }
         })
         
@@ -150,6 +151,7 @@ class ItemsViewController: UITableViewController {
     
     func refreshFirebaseData() {
         
+        // syncs with Firebase everytime any data changes
         firebase.observeEventType(.Value, withBlock: { snapshot in
             
             var snapshotItems = [ToDoItem]()
@@ -166,6 +168,24 @@ class ItemsViewController: UITableViewController {
             }
             
             self.items = snapshotItems
+            self.tableView.reloadData()
+        })
+        
+        // sorts the data in the table by the creation time
+        firebase.queryOrderedByChild("creationTime").observeEventType(.Value, withBlock: { snapshot in
+            var childItems = [ToDoItem]()
+            
+            for items in snapshot.children {
+                let item = items as! FDataSnapshot
+                
+                let hashCode = item.key
+                let name = item.value["name"] as! String
+                let complete = item.value["complete"] as! Bool
+                
+                let toDoItem = ToDoItem(name: name, complete: complete, hashCode: hashCode)
+                childItems.append(toDoItem)
+            }
+            self.items = childItems
             self.tableView.reloadData()
         })
     }
