@@ -39,6 +39,8 @@ class ItemsViewController: UITableViewController {
         let toDoItem = items[indexPath.row]
         cell.nameLabel?.text = toDoItem.name
         
+        toggleCompleteState(cell, complete: toDoItem.complete)
+        
         cell.onButtonClicked = {
             let ac = UIAlertController(title: "Edit name?", message: "", preferredStyle: .Alert)
             
@@ -86,8 +88,6 @@ class ItemsViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as! ToDoItemCell
         let toDoItem = items[indexPath.row]
         let toDoItemComplete = !toDoItem.complete
-
-        print(toDoItemComplete)
         
         toggleCompleteState(cell, complete: toDoItemComplete)
         
@@ -111,7 +111,7 @@ class ItemsViewController: UITableViewController {
                     NSForegroundColorAttributeName: UIColor.redColor(),
                     NSStrikethroughStyleAttributeName: NSNumber(integer: NSUnderlineStyle.StyleThick.rawValue)
                 ]
-                            
+                
                 cell.nameLabel?.attributedText = NSAttributedString(string: text, attributes: attributes)
             }
         }
