@@ -173,7 +173,7 @@ class ItemsViewController: UITableViewController {
         
         // sorts the data in the table by the creation time
         firebase.queryOrderedByChild("creationTime").observeEventType(.Value, withBlock: { snapshot in
-            var childItems = [ToDoItem]()
+            var snapshotItems = [ToDoItem]()
             
             for items in snapshot.children {
                 let item = items as! FDataSnapshot
@@ -183,9 +183,9 @@ class ItemsViewController: UITableViewController {
                 let complete = item.value["complete"] as! Bool
                 
                 let toDoItem = ToDoItem(name: name, complete: complete, hashCode: hashCode)
-                childItems.append(toDoItem)
+                snapshotItems.append(toDoItem)
             }
-            self.items = childItems
+            self.items = snapshotItems
             self.tableView.reloadData()
         })
     }
