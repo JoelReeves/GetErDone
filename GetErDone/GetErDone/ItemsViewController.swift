@@ -40,9 +40,9 @@ class ItemsViewController: UITableViewController {
         cell.nameLabel?.text = toDoItem.name
         
         cell.onButtonClicked = {
-            let ac = UIAlertController(title: "Edit ToDoItem?", message: "", preferredStyle: .Alert)
+            let ac = UIAlertController(title: "Edit name?", message: "", preferredStyle: .Alert)
             
-            let saveAction = UIAlertAction(title: "Save", style: .Default, handler: {
+            let doneAction = UIAlertAction(title: "Done", style: .Default, handler: {
                 alert -> Void in
                 
                 // only saving text if the textfield isn't empty
@@ -60,7 +60,7 @@ class ItemsViewController: UITableViewController {
                 textField.placeholder = "New Item name"
             }
             
-            ac.addAction(saveAction)
+            ac.addAction(doneAction)
             ac.addAction(cancelAction)
             
             self.presentViewController(ac, animated: true, completion: nil)
