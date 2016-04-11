@@ -6,4 +6,4 @@ The hash code for each ToDoItem is generated via the following properties of the
  - **name** - String property
  - **complete** - Boolean property
  
-In Firebase the **creationDate** has the following date format: **MM-dd-yyyy h:mm:ss a**
+In Firebase the **creationDate** has the following date format: **M/dd/yyyy h:mm:ss a**
