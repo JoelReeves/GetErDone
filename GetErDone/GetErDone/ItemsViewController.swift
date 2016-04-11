@@ -59,7 +59,7 @@ class ItemsViewController: UITableViewController {
             let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
             
             ac.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
-                textField.placeholder = "New Item name"
+                textField.placeholder = "New ToDoItem name"
             }
             
             ac.addAction(doneAction)
