@@ -13,7 +13,7 @@ struct ToDoItem {
     var name: String
     var complete: Bool
     let hashCode: String
-    let creationDate: Double
+    let creationDate = NSDate().timeIntervalSince1970
     
     var creationDateString: String {
         let date = NSDate(timeIntervalSince1970: creationDate)
@@ -25,14 +25,12 @@ struct ToDoItem {
     }
     
     init(name: String, complete: Bool, hashCode: String) {
-        self.creationDate = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = complete
         self.hashCode = hashCode
     }
     
     init(name: String) {
-        self.creationDate = NSDate().timeIntervalSince1970
         self.name = name
         self.complete = false
         self.hashCode = (String(self.creationDate) + self.name + String(self.complete)).md5()
