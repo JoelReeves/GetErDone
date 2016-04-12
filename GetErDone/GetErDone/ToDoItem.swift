@@ -12,8 +12,17 @@ import CryptoSwift
 struct ToDoItem {
     var name: String
     var complete: Bool
-    var hashCode: String
-    var creationDate: Double
+    let hashCode: String
+    let creationDate: Double
+    
+    var creationDateString: String {
+        let date = NSDate(timeIntervalSince1970: creationDate)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a"
+        
+        return dateFormatter.stringFromDate(date)
+    }
     
     init(name: String, complete: Bool, hashCode: String) {
         self.creationDate = NSDate().timeIntervalSince1970
@@ -27,14 +36,5 @@ struct ToDoItem {
         self.name = name
         self.complete = false
         self.hashCode = (String(self.creationDate) + self.name + String(self.complete)).md5()
-    }
-    
-    func dateToString() -> String {
-        let date = NSDate(timeIntervalSince1970: creationDate)
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "M/dd/yyyy h:mm:ss a"
-        
-        return dateFormatter.stringFromDate(date)
     }
 }

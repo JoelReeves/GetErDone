@@ -130,7 +130,7 @@ class ItemsViewController: UITableViewController {
                 let toDoItem = ToDoItem(name: newText)
                 
                 let toDoItemPath = self.firebase.childByAppendingPath(toDoItem.hashCode)
-                let toDoItemDictionary = ["name": toDoItem.name, "complete": toDoItem.complete, "creationTime": toDoItem.dateToString()]
+                let toDoItemDictionary = ["name": toDoItem.name, "complete": toDoItem.complete, "creationDate": toDoItem.creationDateString]
                 toDoItemPath.setValue(toDoItemDictionary)
             }
         })
